@@ -1,54 +1,47 @@
-# Asynchronous B2B Lead & Job Scraper Engine
+# Async B2B Lead & Job Scraper
 
-A high-performance, asynchronous web scraping and lead generation pipeline built with **Python**, **Aiogram 3.x stack architecture concepts**, **AioHTTP**, and **BeautifulSoup4**. This production-grade automation engine extracts unstructured business data streams, filters tech stacks via algorithmic analysis, and compiles structured analytical artifacts directly into optimized Excel formats.
+An asynchronous scraping pipeline that collects job listings, scores companies as sales leads by tech stack, and exports a formatted Excel report. Built with **Python**, **aiohttp**, **BeautifulSoup4**, **pandas**, and **openpyxl**.
 
-## 🚀 Key Architectural Features
+> **Demo note:** if the target page cannot be parsed (layout change, blocked request), the scraper falls back to realistic mock data so the full pipeline, including the Excel export, can still be demonstrated.
 
-*   **Asynchronous Processing:** Powered by `aiohttp` for non-blocking network I/O, enabling hyper-fast multi-page request concurrency.
-*   **Resilient Design:** Implements exponential backoff retries and dynamic error handling routines to prevent execution crashes during network instability.
-*   **Data Scoring Layers:** Classifies inbound commercial layers using lexical keyword mappings to isolate high-value target companies ("Hot Prospects").
-*   **Enterprise Document Export:** Converts structured data matrices into visually aligned Excel spreadsheets with automated sheet width calculations using `pandas` and `openpyxl`.
-*   **Strict Security Baselines:** Configured to fully isolate execution runtimes and modular dependency mapping layers.
+## Features
 
-## 🛠️ Tech Stack & Dependencies
+- **Async networking:** non-blocking `aiohttp` requests with a request timeout.
+- **Retry logic:** configurable retries with incremental backoff and structured logging.
+- **Lead scoring:** keyword matching on the detected tech stack (React, TypeScript, Python, AWS, Docker, ...) flags "Hot Prospect" companies.
+- **Excel export:** auto-fitted column widths and clean headers via pandas + openpyxl.
+- **Configurable:** URL, timeout, and retry count live in a single settings class.
 
-*   **Core:** Python 3.9+
-*   **Concurrency Engine:** AioHTTP (Async HTTP Client)
-*   **Parsing Layer:** BeautifulSoup4 & LXML
-*   **Data Compilation & Formatting:** Pandas, OpenPyXL
+## Output
+
+`business_leads.xlsx` with columns: `Company`, `Role/Details`, `Detected Tech Stack`, `Lead Status`.
+
+## Project Structure
 
 ```text
 .
-├── parser.py          # Asynchronous page streaming engine & filtering logic
-├── exporter.py        # Pandas and openpyxl formatting script configuration
-├── main.py            # Operational execution bootstrapper with log formatting
-├── requirements.txt   # Locked production package dependencies
-└── business_leads.xlsx# Generated analytical business artifact (Sample output)
+├── parser.py          # Async fetching, parsing, and lead scoring
+├── exporter.py        # Excel export and formatting
+├── main.py            # Entry point and logging setup
+├── requirements.txt   # Dependencies
+└── business_leads.xlsx  # Sample output
 ```
 
-## ⚙️ Installation & Local Setup
+## Getting Started
 
-1. **Clone the automation repository:**
-   ```bash
-   git clone https://github.com
-   cd ai-lead-scraper
-   ```
+```bash
+git clone https://github.com/SeriDaron/ai-lead-scraper.git
+cd ai-lead-scraper
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python3 main.py
+```
 
-2. **Initialize isolated virtual runtime environment (macOS):**
-   ```bash
-   python3 -m venv .venv
-   source .venv/bin/activate
-   ```
+## Responsible use
 
-3. **Deploy locked application requirements:**
-   ```bash
-   pip install -r requirements.txt
-   ```
+Respect each site's terms of service and `robots.txt`, and keep request rates reasonable.
 
-4. **Boot the Scraping Pipeline Execution Core:**
-   ```bash
-   python3 main.py
-   ```
+## Need something similar?
 
-## 🛡️ Operational Compliance
-This project strictly avoids hardcoded environment attributes. It operates in perfect harmony with modular enterprise development specifications, ensuring clean, readable code structure that can be instantly deployed into serverless cloud environments or scheduled cron tasks.
+I build scrapers, data pipelines, and automation tools. Feel free to reach out.
