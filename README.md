@@ -4,6 +4,10 @@ An asynchronous scraping pipeline that collects job listings, scores companies a
 
 > **Demo note:** if the target page cannot be parsed (layout change, blocked request), the scraper falls back to realistic mock data so the full pipeline, including the Excel export, can still be demonstrated.
 
+## Screenshot
+
+![Excel output with scored B2B leads](docs/screenshot.png)
+
 ## Features
 
 - **Async networking:** non-blocking `aiohttp` requests with a request timeout.
